@@ -2,6 +2,7 @@
 import discord
 from mytoken import TOKEN
 from demineur import get_minesweeper
+from command_handler import handle
 
 client = discord.Client()
 
@@ -11,15 +12,12 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('!hello'):
-        msg = 'Hello {0.author.mention}'.format(message)
-        await client.send_message(message.channel, msg)
-
-    if message.content.startswith("!play"):
-        command = message.content.split()
-        print(command)
-        msg = get_minesweeper(int(command[1]),  int(command[2]), int(command[3]))
-        await client.send_message(message.channel, msg)
+    if message.content.startswith('!'):
+        msg = handle(message)
+        print(msg)
+        print(message.content)
+        if msg is not None:
+            await client.send_message(message.channel, msg)
 
 @client.event
 async def on_ready():
