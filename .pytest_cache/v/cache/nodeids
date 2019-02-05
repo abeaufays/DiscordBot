@@ -1,0 +1,3 @@
+[
+  "test/test_connect_four.py::test_is_winning_move"
+]
