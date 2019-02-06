@@ -1,3 +1,17 @@
 [
-  "test/test_connect_four.py::test_string_first_column_point"
+  "test/test_connect_four.py::test_is_winning_move_column",
+  "test/test_connect_four.py::test_is_winning_move_row",
+  "test/test_connect_four.py::test_is_winning_move_diag_simple",
+  "test/test_connect_four.py::test_is_winning_move_diag_reverse",
+  "test/test_connect_four.py::test_is_winning_move_random",
+  "test/test_connect_four.py::test_is_winning_move_diag_trunced",
+  "test/test_connect_four.py::test_is_winning_move_reverse_diag_trunced",
+  "test/test_connect_four.py::test_string_empty",
+  "test/test_connect_four.py::test_string_first_column_point",
+  "test/test_connect_four.py::test_string_row_point",
+  "test/test_connect_four.py::test_string_diag_simple",
+  "test/test_connect_four.py::test_string_reverse_diag",
+  "test/test_connect_four.py::test_string_random",
+  "test/test_connect_four.py::test_string_diag_trunced",
+  "test/test_connect_four.py::test_string_reverse_diag_trunced"
 ]

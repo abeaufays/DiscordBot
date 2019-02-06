@@ -12,28 +12,28 @@ def first_column_point():
 
 @pytest.fixture
 def row_point():
-    return [ ['', '', 'X'], ['','','X',''],['','','X'],['','','X'],['','',''],[],[]]
+    return [ ['O', 'O', 'X'], ['O','O','X','O'],['O','O','X'],['O','O','X'],['O','O','O'],[],[]]
 
 
 @pytest.fixture
 def diag_simple():
-    return [ ['X'], ['X','X'], ['','','X'],['','','','X'],[],[],[]]
+    return [ ['X'], ['X','X'], ['O','O','X'],['O','O','O','X'],[],[],[]]
 
 @pytest.fixture
 def reverse_diag():
-    return [['','X'],['X'],['','','','X'],['','','X',''],['','X'],['X'],[]]
+    return [['O','X'],['X'],['O','O','O','X'],['O','O','X','O'],['O','X'],['X'],[]]
 
 @pytest.fixture
 def random():
-    return [['X','','','X'],['X','X','','','X'],['','','X','X',''],['','','','',''],['X','X','X','',''],['','','','X'],['','']]
+    return [['X','O','O','X'],['X','X','O','O','X'],['O','O','X','X','O'],['O','O','O','O','O'],['X','X','X','O','O'],['O','O','O','X'],['O','O']]
 
 @pytest.fixture
 def diag_trunced():
-    return [['','X'],['','','X'],['','','','X'],['','','','','X'],[],[],[]]
+    return [['O','X'],['O','O','X'],['O','O','O','X'],['O','O','O','O','X'],[],[],[]]
 
 @pytest.fixture
 def reverse_diag_trunced():
-    return [[],[],['X'],['','','','','X'],['','','','X'],['','','X'],['','X']]
+    return [[],[],['X'],['O','O','O','O','X'],['O','O','O','X'],['O','O','X'],['O','X']]
 
 def test_is_winning_move_column(first_column_point):
     assert is_winning_move(first_column_point,'X', 0) == True
@@ -97,18 +97,66 @@ def test_is_winning_move_reverse_diag_trunced(reverse_diag_trunced):
 
 
 def test_string_empty(empty):
-    assert get_string(empty) == ""
+    expected = ("       \n"
+                "       \n"
+                "       \n"
+                "       \n"
+                "       \n"
+                "       \n")
+    assert get_string(empty," ") == expected
 def test_string_first_column_point(first_column_point):
-    assert get_string(first_column_point) == ""
+    expected = ("       \n"
+                "       \n"
+                "X      \n"
+                "X      \n"
+                "X      \n"
+                "X      \n")
+    assert get_string(first_column_point," ") == expected
 def test_string_row_point(row_point):
-    assert get_string(row_point) == ""
+    expected = ("       \n"
+                "       \n"
+                " O     \n"
+                "XXXXO  \n"
+                "OOOOO  \n"
+                "OOOOO  \n")
+    assert get_string(row_point," ") == expected
 def test_string_diag_simple(diag_simple):
-    assert get_string(diag_simple) == ""
+    expected = ("       \n"
+                "       \n"
+                "   X   \n"
+                "  XO   \n"
+                " XOO   \n"
+                "XXOO   \n")
+    assert get_string(diag_simple," ") == expected
 def test_string_reverse_diag(reverse_diag):
-    assert get_string(reverse_diag) == ""
+    expected = ("       \n"
+                "       \n"
+                "  XO   \n"
+                "  OX   \n"
+                "X OOX  \n"
+                "OXOOOX \n")
+    assert get_string(reverse_diag," ") == expected
 def test_string_random(random):
-    assert get_string(random) == ""
+    expected = ("       \n"
+                " XOOO  \n"
+                "XOXOOX \n"
+                "OOXOXO \n"
+                "OXOOXOO\n"
+                "XXOOXOO\n")
+    assert get_string(random," ") == expected
 def test_string_diag_trunced(diag_trunced):
-    assert get_string(diag_trunced) == ""
+    expected = ("       \n"
+                "   X   \n"
+                "  XO   \n"
+                " XOO   \n"
+                "XOOO   \n"
+                "OOOO   \n")
+    assert get_string(diag_trunced," ") == expected
 def test_string_reverse_diag_trunced(reverse_diag_trunced):
-    assert get_string(reverse_diag_trunced) == ""
+    expected = ("       \n"
+                "   X   \n"
+                "   OX  \n"
+                "   OOX \n"
+                "   OOOX\n"
+                "  XOOOO\n")
+    assert get_string(reverse_diag_trunced," ") == expected
