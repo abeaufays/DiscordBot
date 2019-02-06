@@ -1,3 +1,5 @@
+import itertools
+
 width = 7
 height = 6
 connection_needed = 4
@@ -5,6 +7,12 @@ connection_needed = 4
 player_sign = [":heart:", ":blue_heart:"]
 
 current_game = None
+
+def play(user, play):
+    if current_game is None:
+        current_game = Game()
+    return current_game.play(user,play)
+
 
 class Game(object):
     def Game(self):
@@ -26,6 +34,8 @@ class Game(object):
     
 def is_winning_move(grid, sign, play):
     level = len(grid[play]) -1 
+    if level < 0:
+        return False
     buffer = 0
     for i in grid[play]:
         if i == sign:
@@ -43,7 +53,7 @@ def is_winning_move(grid, sign, play):
         if buffer == 4:
             return True
 
-    w_parse = range( max(0, play-level), min(width, play+level) )
+    w_parse = range( max(0, play-level), min(width, play+height) )
     h_parse = range( max(0, level-play), min(height, level + (width-play)))
 
     buffer = 0
@@ -55,15 +65,24 @@ def is_winning_move(grid, sign, play):
         if buffer == 4:
             return True
 
+
+    rw_parse = range( max(0, play-height + level), min(width, play+height) )
+    rh_parse = range( min(level+play, height), max(0, level - (width-play)) -1, -1)
     buffer = 0
-    for i, j in zip(w_parse, reversed(h_parse)):
+    for i, j in zip(rw_parse, rh_parse):
         if grid[i][j] if j < len(grid[i]) else None == sign:
             buffer += 1
         else:
             buffer = 0
         if buffer == 4:
             return True
-        return False
+    return False
 
-        
 
+def get_string(grid):
+    lines = ["" for x in range(height)]
+    for col in grid:
+        for value, index in itertools.zip_longest(col, range(height), fillvalue=' '):
+            lines[index] = lines[index] + value
+    return lines
+    
